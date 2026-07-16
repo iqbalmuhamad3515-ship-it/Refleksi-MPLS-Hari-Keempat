@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refleksi Hari Ke-4 MPLS - Aku Anak Bersih</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- SheetJS (xlsx) CDN untuk Impor/Ekspor Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
+  <!-- Google Fonts: Fredoka & Quicksand (Bulat, Ramah, & Cocok untuk Anak) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            kidsBlue: '#4FBDBA',
+            kidsYellow: '#FFD369',
+            kidsPink: '#FF9F9F',
+            kidsGreen: '#95CD41',
+            kidsPurple: '#A85CF9',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #eefcff 0%, #e2f1ff 50%, #fff6e3 100%);
+    }
+
+    /* Animasi Mengapung & Gerakan Melambai interaktif */
+    @keyframes float-boy {
+      0%, 100% { transform: translateY(0px) rotate(1deg); }
+      50% { transform: translateY(-15px) rotate(-1deg); }
+    }
+    @keyframes float-girl {
+      0%, 100% { transform: translateY(-10px) rotate(-1.5deg); }
+      50% { transform: translateY(5px) rotate(1.5deg); }
+    }
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .animate-float-boy {
+      animation: float-boy 5s ease-in-out infinite;
+    }
+    .animate-float-girl {
+      animation: float-girl 5.5s ease-in-out infinite;
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    /* Scrollbar Cantik nan Bulat */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFD369;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF9F9F;
+    }
+
+    /* Gaya Desain Neo-Brutalism (Garis Luar Tebal 3D) */
+    .kids-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 4px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      border-radius: 28px;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .kids-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 9px 9px 0px #000;
+    }
+    .kids-card-selected {
+      background: #FFF!important;
+      border-color: #95CD41!important;
+      box-shadow: 6px 6px 0px #95CD41!important;
+      transform: scale(1.03);
+    }
+    .kids-btn {
+      border: 4px solid #000;
+      box-shadow: 5px 5px 0px #000;
+      transition: all 0.1s ease;
+    }
+    .kids-btn:active {
+      transform: translate(5px, 5px);
+      box-shadow: 0px 0px 0px #000;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-16 overflow-x-hidden">
+
+  <!-- TOP BRANDING & HEADER LOGO GANDA -->
+  <div class="max-w-5xl mx-auto px-4 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Logo SDN Kebon Bawang 03 -->
+    <div class="flex items-center gap-3 bg-white border-4 border-black p-2.5 rounded-2xl shadow-[4px_4px_0px_#000] hover:scale-105 transition-transform duration-200">
+      <img src="image_77aecc.jpg" alt="Logo SDN Kebon Bawang 03" class="h-16 w-16 md:h-20 md:w-20 object-contain" onerror="this.onerror=null; this.src='https://https://lh3.googleusercontent.com/d/1MbBbXRv5HBkK4qWAVXXxKydpDK9reAnS'">
+      <div class="text-left font-fredoka">
+        <div class="text-xs text-slate-500">SDN KEBON BAWANG</div>
+        <div class="text-lg font-black text-kidsBlue">03 PAGI</div>
+      </div>
+    </div>
+
+    <!-- Badge Tengah -->
+    <div class="bg-kidsPurple text-white font-fredoka text-center px-6 py-3 rounded-full border-4 border-black shadow-[4px_4px_0px_#000] tracking-wide text-sm md:text-base animate-pulse-slow">
+      🎒 TAHUN AJARAN 2026/2027 • SEMANGAT SEHAT! 🌟
+    </div>
+
+    <!-- Logo SDN Kebon Bawang 07 -->
+    <div class="flex items-center gap-3 bg-white border-4 border-black p-2.5 rounded-2xl shadow-[4px_4px_0px_#000] hover:scale-105 transition-transform duration-200">
+      <img src="Logo KB07 New (1).jpg" alt="Logo SDN Kebon Bawang 07" class="h-16 w-16 md:h-20 md:w-20 object-contain" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1v16J6GduDfTP8JWl4YA3fi6z0yFJ1x9-'">
+      <div class="text-left font-fredoka">
+        <div class="text-xs text-slate-500">SDN KEBON BAWANG</div>
+        <div class="text-lg font-black text-kidsGreen">07 PAGI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Banner Utama -->
+  <header class="relative max-w-5xl mx-auto px-4 mt-6 text-center">
+    <!-- Dekorasi Awan Melayang -->
+    <div class="absolute -top-10 -left-10 w-40 h-40 bg-white rounded-full filter blur-xl opacity-40 pointer-events-none"></div>
+    <div class="absolute top-20 -right-10 w-52 h-52 bg-white rounded-full filter blur-xl opacity-40 pointer-events-none"></div>
+
+    <!-- Kotak Poster Judul Utama -->
+    <div class="bg-white border-[5px] border-black p-6 md:p-10 rounded-[40px] shadow-[10px_10px_0px_#000] relative overflow-hidden my-4">
+      <div class="absolute top-0 right-0 w-32 h-32 bg-kidsYellow rounded-bl-full opacity-20"></div>
+      <div class="absolute bottom-0 left-0 w-24 h-24 bg-kidsPink rounded-tr-full opacity-20"></div>
+
+      <!-- Grid Karakter Laki-laki & Perempuan Melambai -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        
+        <!-- Sisi Kiri: Karakter Siswa Laki-Laki SD -->
+        <div class="col-span-12 md:col-span-3 flex justify-center order-2 md:order-1">
+          <div class="animate-float-boy flex flex-col items-center">
+            <div class="w-40 h-44 flex items-center justify-center bg-white rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] p-3 overflow-hidden">
+              <!-- GANTI GAMBAR ANAK LAKI-LAKI DI SINI -->
+              <img id="img-boy" src="https://lh3.googleusercontent.com/d/1bMScXMxTJIu4AM69dnFVnqbeyCqgHfeI" alt="Siswa Laki-laki" class="w-full h-full object-contain">
+            </div>
+            <span class="mt-2 bg-kidsBlue text-white font-fredoka px-4 py-1.5 rounded-full border-2 border-black text-xs font-bold shadow-[2px_2px_0px_#000]">
+              Halo Sobat! 👋
+            </span>
+          </div>
+        </div>
+
+        <!-- Bagian Tengah: Teks Pengantar Header -->
+        <div class="col-span-12 md:col-span-6 text-center order-1 md:order-2">
+          <!-- Banner MPLS -->
+          <div class="inline-block bg-yellow-200 text-black border-4 border-black px-6 py-2 rounded-2xl font-fredoka text-md md:text-xl shadow-[4px_4px_0px_#000] mb-3 leading-snug">
+            ✨ MPLS SDN KEBON BAWANG 03 & 07 ✨
+          </div>
+
+          <h1 class="font-fredoka text-3xl md:text-5xl text-black tracking-wide leading-tight mt-2">
+            REFLEKSI HARI KE-4
+          </h1>
+          <div class="text-4xl md:text-6xl font-fredoka font-black text-kidsBlue tracking-wider mt-1">
+            AKU ANAK BERSIH
+          </div>
+          <p class="text-xl md:text-2xl font-fredoka text-slate-700 mt-2">
+            "Tubuh Bersih, Lingkungan Bersih, Hidup Sehat!"
+          </p>
+
+          <div class="mt-6 inline-block bg-kidsGreen text-white font-fredoka px-6 py-3.5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000] animate-bounce text-sm md:text-lg">
+            🍀 Ayo ingat kembali kegiatan seru hari ini !
+          </div>
+        </div>
+
+        <!-- Sisi Kanan: Karakter Siswa Perempuan SD -->
+        <div class="col-span-12 md:col-span-3 flex justify-center order-3">
+          <div class="animate-float-girl flex flex-col items-center">
+            <div class="w-40 h-44 flex items-center justify-center bg-white rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] p-3 overflow-hidden">
+              <!-- GANTI GAMBAR ANAK PEREMPUAN DI SINI -->
+              <img id="img-girl" src="https://lh3.googleusercontent.com/d/1gv-9SUAP_ZFkJnw88FBOFLAE8omN8c0n" alt="Siswa Perempuan" class="w-full h-full object-contain">
+            </div>
+            <span class="mt-2 bg-kidsPink text-black font-fredoka px-4 py-1.5 rounded-full border-2 border-black text-xs font-bold shadow-[2px_2px_0px_#000]">
+              Yuk Mulai! 🌸
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Container Utama Form Refleksi -->
+  <main class="max-w-4xl mx-auto px-4 mt-6 space-y-8">
+
+    <!-- PANEL IDENTITAS / SISWA -->
+    <section class="kids-card p-6 md:p-8 bg-white relative">
+      <div class="absolute -top-4 -right-4 bg-kidsPink text-black font-fredoka px-5 py-1.5 rounded-xl border-3 border-black rotate-3 shadow-[3px_3px_0px_#000]">
+        Kamu Siapa? 🎒
+      </div>
+      
+      <h2 class="font-fredoka text-2xl mb-4 text-black flex items-center gap-2">
+        <span>👤</span> Masukkan Nama & Kelasmu
+      </h2>
+
+      <!-- Tab Pemilihan Metode Identitas -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <button id="tab-choose" onclick="switchIdentityMode('choose')" class="kids-btn bg-kidsYellow py-3.5 px-4 rounded-xl font-bold font-fredoka text-black flex items-center justify-center gap-2 text-base md:text-lg">
+          <span>🎯</span> Pilih Dari Daftar
+        </button>
+        <button id="tab-manual" onclick="switchIdentityMode('manual')" class="kids-btn bg-slate-100 py-3.5 px-4 rounded-xl font-bold font-fredoka text-black flex items-center justify-center gap-2 text-base md:text-lg">
+          <span>✍️</span> Ketik Manual
+        </button>
+      </div>
+
+      <!-- Mode 1: Pilih dari Daftar Dropdown -->
+      <div id="mode-choose-container" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Pilih Kelas:</label>
+            <select id="select-class" onchange="onClassSelected()" class="w-full bg-white border-3 border-black rounded-xl p-3 font-bold text-black focus:outline-none focus:ring-2 focus:ring-kidsBlue">
+              <option value="">-- Pilih Kelas --</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Pilih Namamu:</label>
+            <select id="select-name" class="w-full bg-white border-3 border-black rounded-xl p-3 font-bold text-black focus:outline-none focus:ring-2 focus:ring-kidsBlue" disabled>
+              <option value="">-- Pilih Nama --</option>
+            </select>
+          </div>
+        </div>
+        <div id="no-students-alert" class="hidden text-sm bg-blue-50 text-blue-800 p-3 rounded-xl border border-blue-200">
+          💡 Belum ada daftar nama kelas. Silakan gunakan tab <strong>Ketik Manual</strong> atau minta Gurumu mengunggah daftar kelas lewat panel guru di bawah!
+        </div>
+      </div>
+
+      <!-- Mode 2: Input Manual -->
+      <div id="mode-manual-container" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Tulis Kelasmu:</label>
+          <input type="text" id="input-manual-class" placeholder="Contoh: Kelas 1-A" class="w-full bg-white border-3 border-black rounded-xl p-3 font-bold text-black placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-kidsPink">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Tulis Nama Lengkapmu:</label>
+          <input type="text" id="input-manual-name" placeholder="Contoh: Andi Wijaya" class="w-full bg-white border-3 border-black rounded-xl p-3 font-bold text-black placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-kidsPink">
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 1: Kegiatan yang sudah dilakukan -->
+    <section class="kids-card p-6 md:p-8 bg-white relative">
+      <div class="absolute -top-5 -left-4 bg-kidsYellow text-black font-fredoka text-xl px-5 py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000]">
+        1️⃣
+      </div>
+      <h2 class="font-fredoka text-2xl text-black mb-6 pl-8 leading-snug">
+        Kegiatan apa saja yang sudah kamu lakukan hari ini? <span class="text-sm font-sans font-bold text-slate-500 block md:inline md:ml-2">(Bisa pilih lebih dari satu)</span>
+      </h2>
+
+      <!-- Kegiatan Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- Item 1 (Cuci Tangan) -->
+        <div onclick="togglePanel1('cuci-tangan')" id="p1-cuci-tangan" class="kids-card p-4 flex flex-col items-center text-center cursor-pointer select-none bg-[#EAF9F9] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p1-img-cuci-tangan" src="https://lh3.googleusercontent.com/d/1EQtyeDQGqNDH0qZBk5JNeKDIAL7bL5aE" alt="Cuci Tangan" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-tight">Cuci Tangan</span>
+          <input type="checkbox" id="chk-p1-cuci-tangan" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Item 2 (Kebersihan Kelas) -->
+        <div onclick="togglePanel1('menjaga-kebersihan')" id="p1-menjaga-kebersihan" class="kids-card p-4 flex flex-col items-center text-center cursor-pointer select-none bg-[#FFF8EA] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float-delayed flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p1-img-menjaga-kebersihan" src="https://lh3.googleusercontent.com/d/1abFMDFSbWJfe6MvIlabdX7bfo25v6INo" alt="Kebersihan Kelas" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-tight">Kebersihan Kelas & Sekolah</span>
+          <input type="checkbox" id="chk-p1-menjaga-kebersihan" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Item 3 (Mengenal UKS) -->
+        <div onclick="togglePanel1('mengenal-uks')" id="p1-mengenal-uks" class="kids-card p-4 flex flex-col items-center text-center cursor-pointer select-none bg-[#FFF0F0] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p1-img-mengenal-uks" src="https://lh3.googleusercontent.com/d/12OG9UvUxMi5VvlxVq9dZE186lK9RWg2O" alt="Mengenal UKS" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-tight">Mengenal UKS</span>
+          <input type="checkbox" id="chk-p1-mengenal-uks" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Item 4 (Hidup Sehat) -->
+        <div onclick="togglePanel1('hidup-sehat')" id="p1-hidup-sehat" class="kids-card p-4 flex flex-col items-center text-center cursor-pointer select-none bg-[#F0FFF0] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float-delayed flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p1-img-hidup-sehat" src="https://lh3.googleusercontent.com/d/1TQsCIsiGzfKQqu_jRCbZenJiNLV7MstB" alt="Hidup Sehat" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-tight">Hidup Sehat (Makan Bergizi)</span>
+          <input type="checkbox" id="chk-p1-hidup-sehat" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Item 5 (Aksi Bersih) -->
+        <div onclick="togglePanel1('aksi-bersih')" id="p1-aksi-bersih" class="kids-card p-4 flex flex-col items-center text-center cursor-pointer select-none bg-[#F3E8FF] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p1-img-aksi-bersih" src="https://lh3.googleusercontent.com/d/1ZK--DFoGhCc5KKLDW-FGkZGZzWzenh-t" alt="Aksi Bersih" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-tight">Aksi Bersih Sekolah</span>
+          <input type="checkbox" id="chk-p1-aksi-bersih" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: Bagian yang paling disukai -->
+    <section class="kids-card p-6 md:p-8 bg-white relative">
+      <div class="absolute -top-5 -left-4 bg-kidsPink text-black font-fredoka text-xl px-5 py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000]">
+        2️⃣
+      </div>
+      <h2 class="font-fredoka text-2xl text-black mb-6 pl-8 leading-snug">
+        Bagian mana yang paling kamu suka hari ini? <span class="text-sm font-sans font-bold text-slate-500 block md:inline md:ml-2">(Bisa pilih lebih dari satu)</span>
+      </h2>
+
+      <!-- Bagian Disukai Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Fav 1: Cuci Tangan -->
+        <div onclick="togglePanel2('cuci-tangan')" id="p2-cuci-tangan" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none bg-[#EAF9F9] hover:bg-white">
+          <div class="w-20 h-20 mb-4 animate-float flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p2-img-cuci-tangan" src="https://lh3.googleusercontent.com/d/1EQtyeDQGqNDH0qZBk5JNeKDIAL7bL5aE" alt="Suka Cuci Tangan" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-base text-slate-800">💧 Cuci Tangan</span>
+          <input type="checkbox" id="chk-p2-cuci-tangan" class="mt-4 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Fav 2: Sapu Kelas -->
+        <div onclick="togglePanel2('sapu-kelas')" id="p2-sapu-kelas" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none bg-[#FFF8EA] hover:bg-white">
+          <div class="w-20 h-20 mb-4 animate-float-delayed flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p2-img-sapu-kelas" src="https://lh3.googleusercontent.com/d/1abFMDFSbWJfe6MvIlabdX7bfo25v6INo" alt="Suka Bersih Kelas" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-base text-slate-800">🧹 Bersih Kelas</span>
+          <input type="checkbox" id="chk-p2-sapu-kelas" class="mt-4 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Fav 3: Kunjungan UKS -->
+        <div onclick="togglePanel2('uks')" id="p2-uks" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none bg-[#FFF0F0] hover:bg-white">
+          <div class="w-20 h-20 mb-4 animate-float flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p2-img-uks" src="https://lh3.googleusercontent.com/d/12OG9UvUxMi5VvlxVq9dZE186lK9RWg2O" alt="Suka UKS" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-base text-slate-800">🏥 Mengenal UKS</span>
+          <input type="checkbox" id="chk-p2-uks" class="mt-4 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Fav 4: Makan Sehat -->
+        <div onclick="togglePanel2('makan')" id="p2-makan" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none bg-[#F0FFF0] hover:bg-white">
+          <div class="w-20 h-20 mb-4 animate-float-delayed flex items-center justify-center bg-white rounded-2xl border-2 border-black p-2 overflow-hidden shadow-[2px_2px_0px_#000]">
+            <img id="p2-img-makan" src="https://lh3.googleusercontent.com/d/1TQsCIsiGzfKQqu_jRCbZenJiNLV7MstB" alt="Suka Hidup Sehat" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-base text-slate-800">🍏 Hidup Sehat</span>
+          <input type="checkbox" id="chk-p2-makan" class="mt-4 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 3: Perasaan hari ini -->
+    <section class="kids-card p-6 md:p-8 bg-white relative">
+      <div class="absolute -top-5 -left-4 bg-kidsGreen text-black font-fredoka text-xl px-5 py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000]">
+        3️⃣
+      </div>
+      <h2 class="font-fredoka text-2xl text-black mb-6 pl-8 leading-snug">
+        Bagaimana Perasaanmu hari ini? <span class="text-sm font-sans font-bold text-rose-500 block md:inline md:ml-2">(Pilih salah satu)</span>
+      </h2>
+
+      <!-- Emoji Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Emoji 1: Sangat Senang -->
+        <div onclick="selectMood('senang')" id="mood-senang" class="kids-card p-5 flex flex-col items-center justify-center text-center cursor-pointer select-none bg-[#FFFBEB] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float flex items-center justify-center bg-white rounded-full border-4 border-black p-2 overflow-hidden shadow-[inset_-4px_-4px_0px_rgba(0,0,0,0.15)]">
+            <img id="mood-img-senang" src="hhttps://lh3.googleusercontent.com/d/1rpV5iQGUj8llv1uhYNgLonAls3VWcP6u" alt="Senang Sekali" class="w-full h-full object-contain">
+          </div>
+          <span class="font-fredoka text-lg font-bold text-slate-800">Senang Sekali!</span>
+          <input type="radio" name="mood-radio" id="rad-mood-senang" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Emoji 2: Biasa Saja -->
+        <div onclick="selectMood('biasa')" id="mood-biasa" class="kids-card p-5 flex flex-col items-center justify-center text-center cursor-pointer select-none bg-[#F8FAFC] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float-delayed flex items-center justify-center bg-white rounded-full border-4 border-black p-2 overflow-hidden shadow-[inset_-4px_-4px_0px_rgba(0,0,0,0.15)]">
+            <img id="mood-img-biasa" src="https://lh3.googleusercontent.com/d/1LQJ0Zul78x-0Ew2lkanfvCwgDopp4ju5" alt="Biasa Saja" class="w-full h-full object-contain">
+          </div>
+          <span class="font-fredoka text-lg font-bold text-slate-800">Biasa Saja</span>
+          <input type="radio" name="mood-radio" id="rad-mood-biasa" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Emoji 3: Sedih / Bingung -->
+        <div onclick="selectMood('sedih')" id="mood-sedih" class="kids-card p-5 flex flex-col items-center justify-center text-center cursor-pointer select-none bg-[#EFF6FF] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float flex items-center justify-center bg-white rounded-full border-4 border-black p-2 overflow-hidden shadow-[inset_-4px_-4px_0px_rgba(0,0,0,0.15)]">
+            <img id="mood-img-sedih" src="https://lh3.googleusercontent.com/d/15b8hh4dzS6KyTuNUZII33KmkcMcAPPpx" alt="Sedih / Bingung" class="w-full h-full object-contain">
+          </div>
+          <span class="font-fredoka text-lg font-bold text-slate-800">Sedih / Bingung</span>
+          <input type="radio" name="mood-radio" id="rad-mood-sedih" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Emoji 4: Kesal / Marah -->
+        <div onclick="selectMood('marah')" id="mood-marah" class="kids-card p-5 flex flex-col items-center justify-center text-center cursor-pointer select-none bg-[#FFF1F2] hover:bg-white">
+          <div class="w-20 h-20 mb-3 animate-float-delayed flex items-center justify-center bg-white rounded-full border-4 border-black p-2 overflow-hidden shadow-[inset_-4px_-4px_0px_rgba(0,0,0,0.15)]">
+            <img id="mood-img-marah" src="https://lh3.googleusercontent.com/d/1yILjWUetPcGQYEDwCBaMfF8fxG4rw8b7" alt="Marah / Kesal" class="w-full h-full object-contain">
+          </div>
+          <span class="font-fredoka text-lg font-bold text-slate-800">Marah / Kesal</span>
+          <input type="radio" name="mood-radio" id="rad-mood-marah" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 4: Apa yang akan kamu lakukan mulai besok? (Simple Image Grid) -->
+    <section class="kids-card p-6 md:p-8 bg-white relative">
+      <div class="absolute -top-5 -left-4 bg-kidsPurple text-white font-fredoka text-xl px-5 py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000]">
+        4️⃣
+      </div>
+      <h2 class="font-fredoka text-2xl text-black mb-6 pl-8 leading-snug">
+        Apa yang akan kamu lakukan mulai besok? <span class="text-sm font-sans font-bold text-slate-500 block md:inline md:ml-2">(Bisa pilih lebih dari satu)</span>
+      </h2>
+
+      <!-- Grid Pilihan Gambar Komitmen -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Star 1 -->
+        <div onclick="toggleStar(1)" id="star-card-1" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-1" src="https://lh3.googleusercontent.com/d/1f6LXR4RK7zDwWj6x12VhE3PZgtbuWMQX" alt="Cuci Tangan" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Cuci tangan sebelum makan</span>
+          <input type="checkbox" id="chk-star-1" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Star 2 -->
+        <div onclick="toggleStar(2)" id="star-card-2" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-2" src="https://lh3.googleusercontent.com/d/1RiJdWQp4o4q-y6jZVQx-UAlE1M-2fVAU" alt="Kerapihan" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Menjaga kerapihan diri</span>
+          <input type="checkbox" id="chk-star-2" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Star 3 -->
+        <div onclick="toggleStar(3)" id="star-card-3" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-3" src="https://lh3.googleusercontent.com/d/1qo4Tqc11z37vub-OJQFcSjiBm46Z6HSy" alt="Tong Sampah" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Buang sampah di tempat sampah</span>
+          <input type="checkbox" id="chk-star-3" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Star 4 -->
+        <div onclick="toggleStar(4)" id="star-card-4" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-4" src="https://lh3.googleusercontent.com/d/1fNZG-HcLqEIykTwAHOjgjFb3o58Oqg5f" alt="Beribadah" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Beribadah</span>
+          <input type="checkbox" id="chk-star-4" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Star 5 -->
+        <div onclick="toggleStar(5)" id="star-card-5" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-5" src="https://lh3.googleusercontent.com/d/1nxml2rJ5PPTATWuFoiVwN9ZGRf75XyoG" alt="Olahraga" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Olahraga setiap hari</span>
+          <input type="checkbox" id="chk-star-5" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+
+        <!-- Star 6 -->
+        <div onclick="toggleStar(6)" id="star-card-6" class="kids-card p-5 flex flex-col items-center text-center cursor-pointer select-none hover:bg-amber-50">
+          <div class="w-24 h-24 mb-3 flex items-center justify-center bg-white rounded-2xl border-2 border-black overflow-hidden p-1.5 shadow-[2px_2px_0px_#000] transition-transform duration-200">
+            <img id="star-img-6" src="https://lh3.googleusercontent.com/d/1HfO8Hrb8wAuf_KP0SggbS-oE3vfjiBUK" alt="Makan Buah" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-sm text-slate-800 leading-snug">Makan makanan sehat</span>
+          <input type="checkbox" id="chk-star-6" class="mt-3 w-6 h-6 accent-kidsGreen pointer-events-none border-2 border-black">
+        </div>
+      </div>
+    </section>
+
+    <!-- TOMBOL KIRIM REFLEKSI -->
+    <section class="flex flex-col items-center justify-center space-y-4 pt-4">
+      <button onclick="submitRefleksi()" class="kids-btn bg-kidsGreen text-white font-fredoka text-2xl px-12 py-5 rounded-[24px] hover:bg-green-500 hover:scale-105 active:scale-95 transition-all w-full max-w-md shadow-[6px_6px_0px_#000] tracking-wide animate-pulse-slow">
+        🚀 Kirim Refleksi Sekarang!
+      </button>
+      <p class="text-sm text-slate-500 font-bold">Pastikan semua kolom diisi dengan gembira ya! 🎈</p>
+    </section>
+
+    <!-- PANEL GURU / EXCEL MANAGEMENT (Bisa Disembunyikan) -->
+    <section class="kids-card bg-slate-50 border-dashed border-4 border-slate-400 shadow-none hover:shadow-none p-6 mt-12">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h3 class="font-fredoka text-xl text-slate-800 flex items-center gap-2">
+            <span>⚙️</span> Panel Khusus Guru & Wali Kelas
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">Kelola data roster siswa, tambah data secara manual, atau unduh seluruh hasil rekapitulasi ke format Excel.</p>
+        </div>
+        <button onclick="toggleTeacherPanel()" class="kids-btn bg-slate-800 text-white font-bold px-4 py-2 rounded-xl text-sm hover:bg-slate-700">
+          Buka Panel Guru
+        </button>
+      </div>
+
+      <!-- Dashboard Kontrol Guru -->
+      <div id="teacher-panel-content" class="hidden mt-6 pt-6 border-t border-slate-300 space-y-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Box 1: Unggah Data Roster -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-slate-700 text-sm mb-2 flex items-center gap-1">
+                <span>📥</span> 1. Roster Siswa
+              </h4>
+              <p class="text-xs text-slate-500 mb-3">Impor file Excel (.xlsx) dengan kolom <strong>"Nama"</strong> dan <strong>"Kelas"</strong>.</p>
+            </div>
+            <div>
+              <input type="file" id="excel-file-input" accept=".xlsx, .xls, .csv" class="hidden" onchange="handleExcelImport(event)">
+              <button onclick="document.getElementById('excel-file-input').click()" class="w-full bg-blue-500 text-white font-bold py-2 px-3 rounded-lg text-xs kids-btn hover:bg-blue-600">
+                Pilih File & Impor
+              </button>
+            </div>
+          </div>
+
+          <!-- Box 2: Tambah Murid Secara Manual -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <h4 class="font-bold text-slate-700 text-sm mb-2 flex items-center gap-1">
+              <span>➕</span> 2. Tambah Manual
+            </h4>
+            <div class="space-y-2">
+              <input type="text" id="teacher-add-name" placeholder="Nama Murid" class="w-full text-xs p-2 border rounded">
+              <input type="text" id="teacher-add-class" placeholder="Kelas (misal: Kelas 1-A)" class="w-full text-xs p-2 border rounded">
+              <button onclick="teacherAddStudent()" class="w-full bg-kidsGreen text-white font-bold py-1.5 px-3 rounded-lg text-xs kids-btn hover:bg-green-600">
+                Simpan Murid Baru
+              </button>
+            </div>
+          </div>
+
+          <!-- Box 3: Unduh Respon Hasil Refleksi Lokal -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <h4 class="font-bold text-slate-700 text-sm mb-2 flex items-center gap-1">
+                <span>📊</span> 3. Rekap Hasil Lokal
+              </h4>
+              <p class="text-xs text-slate-500 mb-3" id="rekap-info">Saat ini sudah ada 0 siswa yang mengisi refleksi di HP ini.</p>
+            </div>
+            <div class="space-y-2">
+              <button onclick="exportToExcel()" class="w-full bg-yellow-500 text-black font-bold py-2 px-3 rounded-lg text-xs kids-btn hover:bg-yellow-400">
+                Unduh Rekap Excel (.xlsx)
+              </button>
+              <button onclick="clearSubmissions()" class="w-full bg-red-100 text-red-700 hover:bg-red-200 py-1 px-2 rounded text-[10px] font-bold">
+                ⚠️ Hapus Semua Hasil Lokal
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabel Roster Murid Aktif -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex justify-between items-center mb-2">
+            <h4 class="font-bold text-slate-700 text-sm">📋 Daftar Murid Aktif (<span id="total-roster-count">0</span>)</h4>
+            <button onclick="clearRoster()" class="text-xs text-rose-600 font-bold hover:underline">Hapus Semua Roster</button>
+          </div>
+          <div class="max-h-40 overflow-y-auto border rounded text-xs text-slate-600">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-slate-100 border-b">
+                  <th class="p-2">No</th>
+                  <th class="p-2">Nama</th>
+                  <th class="p-2">Kelas</th>
+                </tr>
+              </thead>
+              <tbody id="table-roster-body">
+                <tr>
+                  <td colspan="3" class="text-center p-4 text-slate-400">Belum ada murid. Impor roster dari Excel di atas atau gunakan input manual!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NOTIFIKASI KUSTOM / MODAL POPUP -->
+  <div id="custom-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white border-[5px] border-black p-6 rounded-[28px] shadow-[8px_8px_0px_rgba(0,0,0,1)] max-w-md w-full text-center">
+      <div id="modal-icon" class="text-5xl mb-3">🎉</div>
+      <h3 id="modal-title" class="font-fredoka text-2xl text-black">Berhasil!</h3>
+      <p id="modal-message" class="text-slate-600 font-medium my-4"></p>
+      <button onclick="closeModal()" class="kids-btn bg-kidsYellow text-black font-fredoka px-6 py-2.5 rounded-xl font-bold w-full">
+        Oke, Siap!
+      </button>
+    </div>
+  </div>
+
+  <!-- KANVAS KONFETI PERAYAAN -->
+  <canvas id="confetti-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-40 hidden"></canvas>
+
+  <script>
+    // =========================================================================
+    // 🔗 PENGATURAN LINK GOOGLE APPS SCRIPT (GAS) UNTUK SPREADSHEET
+    // =========================================================================
+    // GANTI TULISAN DI DALAM TANDA KUTIP BAWAH INI DENGAN URL WEB APP KAMU!
+    // Contoh: const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby.../exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQKsqvJiWwGIAZU4ppDgfj4Eha9F52-X1M0pvBVzGaRf24BmpDRgBgO6k387z5S-0r/exec"; 
+    // =========================================================================
+
+    // --- STATE MANAGEMENT ---
+    let studentRoster = []; 
+    let submissionsList = []; 
+    let activeInputMode = 'choose';
+
+    // State form input refleksi
+    let statePanel1 = [];
+    let statePanel2 = [];
+    let stateMood = '';
+    let statePanel4 = [];
+
+    // --- INISIALISASI ---
+    window.addEventListener('load', () => {
+      const savedRoster = localStorage.getItem('mpls_roster_h4');
+      if (savedRoster) {
+        studentRoster = JSON.parse(savedRoster);
+      } else {
+        studentRoster = [
+          { name: "Aluna Kinara", class: "Kelas 1-A" },
+          { name: "Bimo Arya", class: "Kelas 1-A" },
+          { name: "Citra Lestari", class: "Kelas 1-B" }
+        ];
+      }
+
+      const savedSubmissions = localStorage.getItem('mpls_submissions_h4');
+      if (savedSubmissions) {
+        submissionsList = JSON.parse(savedSubmissions);
+      }
+
+      updateClassSelector();
+      updateRosterTable();
+      updateSubmissionsSummary();
+    });
+
+    // --- LOGIKA FORM PILIH SISWA ---
+    function switchIdentityMode(mode) {
+      activeInputMode = mode;
+      const tabChoose = document.getElementById('tab-choose');
+      const tabManual = document.getElementById('tab-manual');
+      const containerChoose = document.getElementById('mode-choose-container');
+      const containerManual = document.getElementById('mode-manual-container');
+
+      if (mode === 'choose') {
+        tabChoose.classList.replace('bg-slate-100', 'bg-kidsYellow');
+        tabManual.classList.replace('bg-kidsPink', 'bg-slate-100');
+        containerChoose.classList.remove('hidden');
+        containerManual.classList.add('hidden');
+      } else {
+        tabChoose.classList.replace('bg-kidsYellow', 'bg-slate-100');
+        tabManual.classList.replace('bg-slate-100', 'bg-kidsPink');
+        containerChoose.classList.add('hidden');
+        containerManual.classList.remove('hidden');
+      }
+    }
+
+    function updateClassSelector() {
+      const selectClass = document.getElementById('select-class');
+      selectClass.innerHTML = '<option value="">-- Pilih Kelas --</option>';
+
+      const uniqueClasses = [...new Set(studentRoster.map(s => s.class))].sort();
+      uniqueClasses.forEach(cls => {
+        const opt = document.createElement('option');
+        opt.value = cls;
+        opt.textContent = cls;
+        selectClass.appendChild(opt);
+      });
+
+      const noStudentsAlert = document.getElementById('no-students-alert');
+      if (studentRoster.length === 0) {
+        noStudentsAlert.classList.remove('hidden');
+      } else {
+        noStudentsAlert.classList.add('hidden');
+      }
+    }
+
+    function onClassSelected() {
+      const selectedClass = document.getElementById('select-class').value;
+      const selectName = document.getElementById('select-name');
+      selectName.innerHTML = '<option value="">-- Pilih Nama --</option>';
+
+      if (!selectedClass) {
+        selectName.disabled = true;
+        return;
+      }
+
+      const filteredStudents = studentRoster.filter(s => s.class === selectedClass).sort((a, b) => a.name.localeCompare(b.name));
+      filteredStudents.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.name;
+        opt.textContent = s.name;
+        selectName.appendChild(opt);
+      });
+      selectName.disabled = false;
+    }
+
+    // --- INTERAKSI KLIK PANEL REFLEKSI ---
+    function togglePanel1(itemId) {
+      const card = document.getElementById(`p1-${itemId}`);
+      const chk = document.getElementById(`chk-p1-${itemId}`);
+      const index = statePanel1.indexOf(itemId);
+      if (index > -1) {
+        statePanel1.splice(index, 1);
+        card.classList.remove('kids-card-selected');
+        chk.checked = false;
+      } else {
+        statePanel1.push(itemId);
+        card.classList.add('kids-card-selected');
+        chk.checked = true;
+      }
+    }
+
+    function togglePanel2(itemId) {
+      const card = document.getElementById(`p2-${itemId}`);
+      const chk = document.getElementById(`chk-p2-${itemId}`);
+      const index = statePanel2.indexOf(itemId);
+      if (index > -1) {
+        statePanel2.splice(index, 1);
+        card.classList.remove('kids-card-selected');
+        chk.checked = false;
+      } else {
+        statePanel2.push(itemId);
+        card.classList.add('kids-card-selected');
+        chk.checked = true;
+      }
+    }
+
+    function selectMood(moodId) {
+      const moods = ['senang', 'biasa', 'sedih', 'marah'];
+      moods.forEach(m => {
+        document.getElementById(`mood-${m}`).classList.remove('kids-card-selected');
+        document.getElementById(`rad-mood-${m}`).checked = false;
+      });
+      stateMood = moodId;
+      document.getElementById(`mood-${moodId}`).classList.add('kids-card-selected');
+      document.getElementById(`rad-mood-${moodId}`).checked = true;
+    }
+
+    function toggleStar(starIndex) {
+      const card = document.getElementById(`star-card-${starIndex}`);
+      const img = document.getElementById(`star-img-${starIndex}`);
+      const chk = document.getElementById(`chk-star-${starIndex}`);
+      const index = statePanel4.indexOf(starIndex);
+      if (index > -1) {
+        statePanel4.splice(index, 1);
+        card.classList.remove('kids-card-selected');
+        if (img) img.classList.remove('scale-110');
+        chk.checked = false;
+      } else {
+        statePanel4.push(starIndex);
+        card.classList.add('kids-card-selected');
+        if (img) img.classList.add('scale-110');
+        chk.checked = true;
+      }
+    }
+
+    // Mapping Kustom
+    const mappingKegiatan = {
+      'cuci-tangan': "Mencuci Tangan",
+      'menjaga-kebersihan': "Menjaga Kebersihan Kelas & Sekolah",
+      'mengenal-uks': "Mengenal Ruang UKS",
+      'hidup-sehat': "Belajar Hidup Sehat",
+      'aksi-bersih': "Melakukan Aksi Bersih Sekolah"
+    };
+    const mappingBagianDisukai = {
+      'cuci-tangan': "Praktik Cuci Tangan",
+      'sapu-kelas': "Bersih-bersih Kelas",
+      'uks': "Melihat Fasilitas UKS",
+      'makan': "Makan & Pola Hidup Sehat"
+    };
+    const mappingMood = {
+      'senang': "Sangat Senang / Gembira 😊",
+      'biasa': "Biasa Saja 😐",
+      'sedih': "Sedih / Bingung 😢",
+      'marah': "Marah / Kesal 😡"
+    };
+    const mappingBesok = {
+      1: "Mencuci tangan sebelum makan",
+      2: "Menjaga kerapihan diri sendiri",
+      3: "Membuang sampah di tempat sampah",
+      4: "Tidak membuang sampah sembarangan",
+      5: "Mulai rutin berolahraga setiap hari",
+      6: "Memilih makan makanan sehat"
+    };
+
+    // --- PROSES KIRIM REFLEKSI (KE GOOGLE SHEETS) ---
+    function submitRefleksi() {
+      let currentName = "";
+      let currentClass = "";
+
+      if (activeInputMode === 'choose') {
+        currentClass = document.getElementById('select-class').value;
+        currentName = document.getElementById('select-name').value;
+      } else {
+        currentClass = document.getElementById('input-manual-class').value.trim();
+        currentName = document.getElementById('input-manual-name').value.trim();
+      }
+
+      if (!currentClass || !currentName) {
+        showModal("⚠️ Ups, Lupa!", "Silakan pilih atau ketik namamu dan kelasmu terlebih dahulu ya!", "🧸");
+        return;
+      }
+      if (statePanel1.length === 0) {
+        showModal("🤔 Kegiatan Hari Ini?", "Pilih minimal satu kegiatan di Panel No. 1!", "🧼");
+        return;
+      }
+      if (statePanel2.length === 0) {
+        showModal("❤️ Sukai Sesuatu?", "Pilih bagian yang paling kamu sukai di Panel No. 2!", "✨");
+        return;
+      }
+      if (!stateMood) {
+        showModal("🎭 Bagaimana Perasaanmu?", "Pilih salah satu emoji wajah di Panel No. 3!", "☀️");
+        return;
+      }
+      if (statePanel4.length === 0) {
+        showModal("⭐ Aksi Mulai Besok?", "Pilih minimal satu komitmen di Panel No. 4!", "🌟");
+        return;
+      }
+
+      const readableKegiatan = statePanel1.map(k => mappingKegiatan[k] || k);
+      const readableDisukai = statePanel2.map(d => mappingBagianDisukai[d] || d);
+      const readableMoodText = mappingMood[stateMood] || stateMood;
+      const readableBesok = statePanel4.sort().map(num => mappingBesok[num] || num);
+
+      const newSubmission = {
+        studentName: currentName,
+        studentClass: currentClass,
+        kegiatan: readableKegiatan,
+        disukai: readableDisukai,
+        perasaan: readableMoodText,
+        besok: readableBesok,
+        timestamp: new Date().toLocaleString('id-ID')
+      };
+
+      const submitBtn = document.querySelector('button[onclick="submitRefleksi()"]');
+      const originalBtnHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = "⏳ Sedang Mengirim Data...";
+      submitBtn.disabled = true;
+
+      // PROSES PENGIRIMAN DATA MENGGUNAKAN FETCH
+      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(newSubmission),
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          }
+        })
+        .then(res => res.json())
+        .then(result => {
+          if (result && result.status === "success") {
+            // Berhasil kirim ke Google Sheets
+            triggerConfetti();
+            showModal("🎉 Sukses Terkirim!", `Luar biasa! Terima kasih <strong>${currentName}</strong>.<br>Refleksi kamu telah masuk ke komputer Bapak/Ibu Guru!`, "🏆");
+          } else {
+            throw new Error(result.message || "Gagal di server.");
+          }
+        })
+        .catch(err => {
+          console.error("Gagal mengirim ke server:", err);
+          // Fallback penyimpanan lokal jika internet putus
+          submissionsList.push(newSubmission);
+          localStorage.setItem('mpls_submissions_h4', JSON.stringify(submissionsList));
+          
+          triggerConfetti();
+          showModal("💾 Tersimpan Secara Lokal!", `Koneksi ke sistem bermasalah, tapi tenang! Data refleksi <strong>${currentName}</strong> berhasil diamankan di memori HP ini.`, "⚠️");
+          updateSubmissionsSummary();
+        })
+        .finally(() => {
+          resetRefleksiForm();
+          submitBtn.innerHTML = originalBtnHTML;
+          submitBtn.disabled = false;
+        });
+
+      } else {
+        // Jika Guru belum mengisi URL, simpan lokal saja
+        submissionsList.push(newSubmission);
+        localStorage.setItem('mpls_submissions_h4', JSON.stringify(submissionsList));
+
+        triggerConfetti();
+        showModal("🎉 Selesai!", `Terima kasih <strong>${currentName}</strong>! (Data tersimpan di perangkat lokal karena Link Spreadsheet belum diisi Guru).`, "🏆");
+        
+        resetRefleksiForm();
+        updateSubmissionsSummary();
+        submitBtn.innerHTML = originalBtnHTML;
+        submitBtn.disabled = false;
+      }
+    }
+
+    function resetRefleksiForm() {
+      statePanel1 = [];
+      ['cuci-tangan', 'menjaga-kebersihan', 'mengenal-uks', 'hidup-sehat', 'aksi-bersih'].forEach(id => {
+        document.getElementById(`p1-${id}`).classList.remove('kids-card-selected');
+        document.getElementById(`chk-p1-${id}`).checked = false;
+      });
+
+      statePanel2 = [];
+      ['cuci-tangan', 'sapu-kelas', 'uks', 'makan'].forEach(id => {
+        document.getElementById(`p2-${id}`).classList.remove('kids-card-selected');
+        document.getElementById(`chk-p2-${id}`).checked = false;
+      });
+
+      stateMood = '';
+      ['senang', 'biasa', 'sedih', 'marah'].forEach(m => {
+        document.getElementById(`mood-${m}`).classList.remove('kids-card-selected');
+        document.getElementById(`rad-mood-${m}`).checked = false;
+      });
+
+      statePanel4 = [];
+      for (let i = 1; i <= 6; i++) {
+        document.getElementById(`star-card-${i}`).classList.remove('kids-card-selected');
+        const img = document.getElementById(`star-img-${i}`);
+        if (img) img.classList.remove('scale-110');
+        document.getElementById(`chk-star-${i}`).checked = false;
+      }
+
+      document.getElementById('input-manual-name').value = '';
+      document.getElementById('input-manual-class').value = '';
+    }
+
+    // --- PANEL GURU & KELOLA ROSTER LOKAL ---
+    function handleExcelImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = e.target.result;
+        try {
+          const workbook = XLSX.read(data, { type: 'binary' });
+          const firstSheetName = workbook.SheetNames[0];
+          const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheetName]);
+
+          if (jsonData.length === 0) return showModal("⚠️ Kosong", "Excel tidak ada data.", "📁");
+
+          let nameKey = "", classKey = "";
+          Object.keys(jsonData[0]).forEach(k => {
+            const kl = k.toLowerCase().trim();
+            if (['nama', 'nama siswa', 'name', 'student'].includes(kl)) nameKey = k;
+            if (['kelas', 'class', 'group'].includes(kl)) classKey = k;
+          });
+
+          if (!nameKey || !classKey) return showModal("⚠️ Gagal", "File butuh header 'Nama' dan 'Kelas'.", "📊");
+
+          const parsedStudents = jsonData.map(row => ({
+            name: String(row[nameKey]).trim(),
+            class: String(row[classKey]).trim()
+          })).filter(s => s.name && s.class);
+
+          if (parsedStudents.length > 0) {
+            studentRoster = parsedStudents;
+            localStorage.setItem('mpls_roster_h4', JSON.stringify(studentRoster));
+            updateClassSelector();
+            updateRosterTable();
+            showModal("🎉 Roster Dimuat", `Sukses memuat <strong>${parsedStudents.length} siswa</strong>!`, "🎒");
+          }
+        } catch (err) {
+          showModal("❌ Eror Membaca Excel", "Gagal memproses file Excel tersebut.", "💥");
+        }
+      };
+      reader.readAsBinaryString(file);
+      event.target.value = ''; 
+    }
+
+    function teacherAddStudent() {
+      const name = document.getElementById('teacher-add-name').value.trim();
+      const cls = document.getElementById('teacher-add-class').value.trim();
+      if (!name || !cls) return showModal("⚠️ Gagal", "Nama dan Kelas harus diisi!", "✍️");
+
+      studentRoster.push({ name: name, class: cls });
+      localStorage.setItem('mpls_roster_h4', JSON.stringify(studentRoster));
+      document.getElementById('teacher-add-name').value = '';
+      document.getElementById('teacher-add-class').value = '';
+      updateClassSelector();
+      updateRosterTable();
+      showModal("🎉 Siswa Ditambah", `Berhasil menambah <strong>${name} (${cls})</strong>!`, "📋");
+    }
+
+    function exportToExcel() {
+      if (submissionsList.length === 0) return showModal("📊 Data Kosong", "Belum ada respon refleksi tersimpan lokal.", "😴");
+
+      const preparedData = submissionsList.map((s, index) => ({
+        "No": index + 1,
+        "Waktu Pengisian": s.timestamp,
+        "Nama Siswa": s.studentName,
+        "Kelas": s.studentClass,
+        "Kegiatan Hari Ini": s.kegiatan.join(", "),
+        "Bagian Paling Disukai": s.disukai.join(", "),
+        "Perasaan Hari Ini": s.perasaan,
+        "Rencana Mulai Besok": s.besok.join(", ")
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(preparedData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Hasil Refleksi H4");
+      
+      const max_widths = [];
+      preparedData.forEach(row => {
+        Object.keys(row).forEach((key, cIdx) => {
+          const len = String(row[key]).length;
+          if (!max_widths[cIdx] || len > max_widths[cIdx]) max_widths[cIdx] = len;
+        });
+      });
+      worksheet["!cols"] = max_widths.map(w => ({ wch: w + 5 }));
+
+      XLSX.writeFile(workbook, "Rekap_Lokal_Refleksi_MPLS_H4.xlsx");
+    }
+
+    function updateRosterTable() {
+      const tbody = document.getElementById('table-roster-body');
+      document.getElementById('total-roster-count').textContent = studentRoster.length;
+      if (studentRoster.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" class="text-center p-4 text-slate-400">Belum ada murid.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = '';
+      [...studentRoster].sort((a, b) => a.class.localeCompare(b.class) || a.name.localeCompare(b.name)).forEach((student, index) => {
+        tbody.innerHTML += `<tr class="border-b hover:bg-slate-50"><td class="p-2 font-bold">${index + 1}</td><td class="p-2">${student.name}</td><td class="p-2"><span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded font-bold">${student.class}</span></td></tr>`;
+      });
+    }
+
+    function updateSubmissionsSummary() {
+      document.getElementById('rekap-info').innerHTML = `Saat ini ada <strong>${submissionsList.length} isian</strong> di memori lokal HP ini.`;
+    }
+
+    function clearRoster() {
+      if (confirm("Hapus semua daftar murid?")) {
+        studentRoster = [];
+        localStorage.removeItem('mpls_roster_h4');
+        updateClassSelector();
+        updateRosterTable();
+      }
+    }
+
+    function clearSubmissions() {
+      if (confirm("Hapus semua hasil refleksi lokal?")) {
+        submissionsList = [];
+        localStorage.removeItem('mpls_submissions_h4');
+        updateSubmissionsSummary();
+      }
+    }
+
+    function toggleTeacherPanel() {
+      document.getElementById('teacher-panel-content').classList.toggle('hidden');
+    }
+
+    // --- MODAL & ANIMASI ---
+    function showModal(title, msg, emoji = "🎈") {
+      document.getElementById('modal-title').innerHTML = title;
+      document.getElementById('modal-message').innerHTML = msg;
+      document.getElementById('modal-icon').textContent = emoji;
+      document.getElementById('custom-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('custom-modal').classList.add('hidden');
+    }
+
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      canvas.classList.remove('hidden');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const colors = ['#4FBDBA', '#FFD369', '#FF9F9F', '#95CD41', '#A85CF9'];
+      const confettiArray = [];
+      for (let i = 0; i < 150; i++) {
+        confettiArray.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speedX: Math.random() * 4 - 2,
+          speedY: Math.random() * 5 + 4,
+          rotation: Math.random() * 360,
+          rotationSpeed: Math.random() * 4 - 2
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        confettiArray.forEach(p => {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+          p.x += p.speedX; p.y += p.speedY; p.rotation += p.rotationSpeed;
+          if (p.y < canvas.height) active = true;
+        });
+        if (active) requestAnimationFrame(draw);
+        else canvas.classList.add('hidden');
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>
